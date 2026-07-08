@@ -1,17 +1,19 @@
 # github-contribution-log-2
 
-# Contribution [#]: [Issue Title]
+# Contribution [#9426]: [Don't hide the "Auto Assign Parts" on "Build Order > Line Items" page]
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** [2]  
+**Student:** [Alonso Lopez]  
+**Issue:** [[https://github.com/inventree/InvenTree/issues/9426](https://github.com/inventree/InvenTree/issues/9426)]  
+**Status:** [Phase I] [In Progress]
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+I chose issue #9426 because it is a clear user interface improvement, similar to the previous one I worked on, that further expands on the full-stack experience I am looking to gain. Most of my experience has been stronger on the backend and data side, so working on another frontend issue will help me sharpen the skills I gained from the first issue.
+
+From reading the issue thread, I understand that this issue has a practical impact because keeping the “Auto Allocate Stock” button visible, even when disabled, would make the build order allocation workflow clearer and help users understand what steps are needed before parts can be allocated. I left a comment on the thread but have not received a response, so I will provide updates once I hear back.
 
 ---
 
