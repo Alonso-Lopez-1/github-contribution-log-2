@@ -21,19 +21,19 @@ From reading the issue thread, I understand that this issue has a practical impa
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+The "Auto Allocate Stock" button is hidden when a build order has not yet been issued. Because the button is not visible, users receive no indication of why allocation is unavailable or what action they must take first. This can make the workflow confusing for new users.
 
 ### Expected Behavior
 
-[What should happen?]
+The "Auto Allocate Stock" button should always be visible. When allocation is unavailable, the button should appear disabled and provide a tooltip explaining why it cannot be used and how to enable it by issuing or reissuing the build order.
 
 ### Current Behavior
 
-[What actually happens?]
+I reproduced the current behavior using the latest development version of InvenTree. Since this issue was opened, the UI has changed. The "Line Items" tab is now named "Required Parts", and the application now includes separate "Allocated Stock" and "Consumed Stock" tabs. The second requested improvement appears to have already been implemented, as clicking Auto Allocate with no selected parts now assumes all parts should be allocated. However, the first requested improvement remains unresolved because the Auto Allocate button is still hidden while the build order is pending and no tooltip explains why allocation is unavailable.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+Based on reproducing the issue, I expect the affected components to be the Build Order Required Parts page and the frontend components responsible for rendering the Auto Allocate Stock action and its enabled/disabled state. I will identify the specific files before implementation.
 
 ---
 
@@ -41,19 +41,26 @@ From reading the issue thread, I understand that this issue has a practical impa
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+I used the existing InvenTree development container that I configured during my previous contribution. Since the environment was already working, no additional setup issues were encountered. I updated my fork, created a new feature branch, and verified that the latest development version reproduced the behavior.
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+- Start the InvenTree development environment.
+- Create or open a Build Order that is still in the Pending state.
+- Navigate to the Required Parts tab.
+- Observe that the Auto Allocate Stock button is not displayed.
+- Issue the Build Order.
+- Observe that the Auto Allocate Stock button now appears.
+- Click Auto Allocate Stock without selecting any parts.
+- Observe that allocation proceeds for all parts, indicating the second requested improvement has already been implemented.
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+- **Commit showing reproduction:** Not created yet. I am waiting for maintainer confirmation that the remaining behavior should still be implemented before creating a feature branch.
+- **Screenshots/logs:** <img width="1917" height="966" alt="image" src="https://github.com/user-attachments/assets/b1ed4074-1f6a-466a-a19c-2db51ad88b75" />
+<img width="1918" height="967" alt="image" src="https://github.com/user-attachments/assets/205497a8-a2f5-4d92-9b45-aac72d85038f" />
+
+- **My findings:** The issue seems to be partially completed. The automatic allocation behavior when no parts are selected has already changed.
 
 ---
 
@@ -61,30 +68,32 @@ From reading the issue thread, I understand that this issue has a practical impa
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+The issue appears to be partially resolved since it was originally reported. The automatic allocation behavior when no parts are selected has already changed. However, the UI still removes the Auto Allocate action entirely when the build order is pending rather than showing a disabled action with guidance for the user.
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+If the maintainer confirms this behavior should still be addressed, I plan to modify the frontend so the Auto Allocate Stock action remains visible while disabled whenever allocation cannot be performed. A tooltip or similar explanatory message would describe why the action is unavailable and how to enable it.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** Reference "Understanding the issue" above
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** I plan to look for similar disabled action buttons elsewhere in the Build Order interface so the implementation remains consistent with the existing UI.
 
-**Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+**Plan:** 
+1. Identify the component that renders the Auto Allocate button.
+2. Determine why the button is hidden instead of disabled.
+3. Modify the rendering logic to keep the button visible.
+4. Add a tooltip explaining why allocation is unavailable.
+5. Verify that issued Build Orders continue to behave normally.
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** 
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:** Compare the implementation against CONTRIBUTING.md and existing UI patterns before opening a pull request.
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** Verify that pending Build Orders display a disabled Auto Allocate button with guidance, while issued Build Orders continue to allow allocation. Confirm that existing allocation behavior is unchanged.
 
 ---
 
